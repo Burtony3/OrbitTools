@@ -12,7 +12,7 @@ function dX = KepSTM(~, X, mu)
 %   - X::<strong>Vector{Double}</strong>: State vector at propgation time
 %   - mu::<strong>Double</strong>: Standard Gravitational Parameter
 % 
-% </strong>Outputs:</strong>
+% <strong>Outputs:</strong>
 %   - dX::<strong>Vector{Double}</strong>: Derivative of input vector at 
 %       propagation time
 

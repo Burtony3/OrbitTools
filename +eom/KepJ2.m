@@ -14,7 +14,7 @@ function dX = KepJ2(~, X, mu, J2, ae)
 %   - J2::<strong>Double</strong>: Oblateness Factor
 %   - ae::<strong>Double</strong>: Reference Distance
 % 
-% </strong>Outputs:</strong>
+% <strong>Outputs:</strong>
 %   - dX::<strong>Vector{Double}</strong>: Derivative of input vector at 
 %       propagation time
 

@@ -70,7 +70,7 @@ function coe = rv2coe(rvec, vvec, opts)
         
         % SEMI-MAJOR AXIS Ver. 2
         epsilon = 0.5*v^2 - mu/r;
-        a = mu / (2*epsilon);
+        a = -mu / (2*epsilon);
         
         % INCLINATION
         i = acos(hvec(3)/h);

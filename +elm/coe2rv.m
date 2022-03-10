@@ -2,8 +2,8 @@ function [rvec, vvec] = coe2rv(coe, mu)
     a = coe(1);
     e = coe(2);
     i = coe(3)*pi/180;
-    omega = coe(4)*pi/180;
-    Omega = coe(5)*pi/180;
+    omega = coe(5)*pi/180;
+    Omega = coe(4)*pi/180;
     TA = coe(6)*pi/180;
     
     r = a*(1-e^2) / (1 + e*cos(TA));

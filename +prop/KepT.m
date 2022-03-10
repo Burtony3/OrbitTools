@@ -16,6 +16,8 @@ if (isstring(tspan) || ischar(tspan)) && strcmpi(tspan, 'period')
     tspan = linspace(0, T, 100);
 end
 
+[rvec_out, vvec_out] = deal(zeros(length(tspan), 3));
+
 for i = 1:length(tspan)
     % FINDING CONIC TYPE
     if a > 0
@@ -34,11 +36,14 @@ for i = 1:length(tspan)
         Gt = 1 - a / rho * (1 - cos(dE));                                       % ""
 
     else
-        X = NaN;
+        if tspan(i) > 0
+            psi = 1; 
+        else
+            psi = -1;
+        end
         disp('Hyperbolic')
-        return
-    %     ψ = tspan(i) > 0 ? 1 : -1
-    %     ∂H = (rvec, ψ, rho, sig, a) -> (-ψ - rho + (sig/√a)*(cosh(rho) - 1) + (1 - norm(rvec)/a)*sinh(rho))
+        
+%         dH = (rvec, ψ, rho, sig, a) -> (-psi - rho + (sig/√a)*(cosh(rho) - 1) + (1 - norm(rvec)/a)*sinh(rho))
     end
 
     % SOLVING FOR NEW rvec & vvec VECTORS
