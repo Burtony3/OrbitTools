@@ -36,14 +36,26 @@ for i = 1:length(tspan)
         Gt = 1 - a / rho * (1 - cos(dE));                                       % ""
 
     else
+        % CREATING INITIAL GUESS
         if tspan(i) > 0
-            psi = 1; 
+            dHi = 1; 
         else
-            psi = -1;
+            dHi = -1;
         end
-        disp('Hyperbolic')
         
-%         dH = (rvec, ψ, rho, sig, a) -> (-psi - rho + (sig/√a)*(cosh(rho) - 1) + (1 - norm(rvec)/a)*sinh(rho))
+        % DEFINING EQUATION AND NECESSARY CONSTANTS
+        dN = sqrt(-mu / a^3) * tspan(i);
+        fdH = @(dH) (-dN - dH + sig / sqrt(a) * (cosh(dH) - 1) + (1 - norm(rvec) / a) * sinh(dH));
+        dH = fsolve(fdH, dHi, optimset('Display', 'off'));
+        
+        % CREATING USEFUL CONSTANT
+        rho = a + (r - a)*cosh(dH) + sig*sqrt(a)*sinh(dH);
+        
+        % FINDING LAGRANGIAN COEFFICIENTS 
+        F = 1 - a/r*(1 - cosh(dH));
+        G = a*sig/sqrt(mu)*(1 - cosh(dH)) + r*sqrt(-a/mu)*sinh(dH);
+        Ft = -sqrt(-mu*a)/(rho*r)*sinh(dH);
+        Gt = 1 - a/rho*(1 - cosh(dH));
     end
 
     % SOLVING FOR NEW rvec & vvec VECTORS

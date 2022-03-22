@@ -1,4 +1,4 @@
-function [rf, vf] = Kepfg(r0, v0, dnu, mu, units)
+function [rf, vf] = Kepfg_anom(r0, v0, dnu, mu, units)
 if nargin < 5; units = 'degrees'; end
 
 % ALIGNING UNITS
