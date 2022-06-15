@@ -3,6 +3,7 @@ function X = KepT(rvec, vvec, tspan, mu)
 %   Detailed explanation goes here
 %
 %   X = KEPT(rvec, vvec, tspan, mu)
+%   tspan is in seconds
 
 % ASSIGNING CONSTANTS
 r = norm(rvec); v = norm(vvec);
@@ -39,17 +40,19 @@ for i = 1:length(tspan)
         % CREATING INITIAL GUESS
         if tspan(i) > 0
             dHi = 1; 
+        elseif tspan(i) == 0
+            dHi = 0;
         else
             dHi = -1;
         end
         
         % DEFINING EQUATION AND NECESSARY CONSTANTS
         dN = sqrt(-mu / a^3) * tspan(i);
-        fdH = @(dH) (-dN - dH + sig / sqrt(a) * (cosh(dH) - 1) + (1 - norm(rvec) / a) * sinh(dH));
+        fdH = @(dH) (-dN - dH + sig / sqrt(-a) * (cosh(dH) - 1) + (1 - norm(rvec) / a) * sinh(dH));
         dH = fsolve(fdH, dHi, optimset('Display', 'off'));
         
         % CREATING USEFUL CONSTANT
-        rho = a + (r - a)*cosh(dH) + sig*sqrt(a)*sinh(dH);
+        rho = a + (r - a)*cosh(dH) + sig*sqrt(-a)*sinh(dH);
         
         % FINDING LAGRANGIAN COEFFICIENTS 
         F = 1 - a/r*(1 - cosh(dH));

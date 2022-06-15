@@ -18,17 +18,17 @@ function dX = KepJ2(~, X, mu, J2, ae)
 %   - dX::<strong>Vector{Double}</strong>: Derivative of input vector at 
 %       propagation time
 
-    % PULLING VALUES FROM STATE
-    r = sqrt(sum(X(1:3).^2));
-    R = X(1:3);
+% PULLING VALUES FROM STATE
+r = sqrt(sum(X(1:3).^2));
+R = X(1:3);
 
-    % GENERATING CONSTANTS
-    J0 = 1.5*mu*J2*ae^2;
-    Jr = (J0 / r^5)*(1 - (5 / r^2)*dot(R, [0; 0; 1])^2);
-    Jk = 2*(J0 / r^5)*dot(R, [0; 0; 1]);
-    P = Jr*R + Jk*[0; 0; 1];
+% GENERATING CONSTANTS
+J0 = 1.5*mu*J2*ae^2;
+Jr = (J0 / r^5)*(1 - (5 / r^2)*dot(R, [0; 0; 1])^2);
+Jk = 2*(J0 / r^5)*dot(R, [0; 0; 1]);
+P = Jr*R + Jk*[0; 0; 1];
 
-    % DEFINING DERIVATIVE
-    dX = [X(4:6);
-        -mu/r^3*R - P];
+% DEFINING DERIVATIVE
+dX = [X(4:6);
+    -mu/r^3*R - P];
 end

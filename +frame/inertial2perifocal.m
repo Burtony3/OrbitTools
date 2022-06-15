@@ -21,6 +21,7 @@ omega = coe(5);
 i = coe(3);
 
 % CALCULATING FRAME
+% R_intertial2perifocal = R3(−ω)R1(−i)R3(−Ω)
 R = frame.rot('313', [-Omega -i -omega], 'deg');
 
 %% ROTATING AND REMOVING ELEMENTS
