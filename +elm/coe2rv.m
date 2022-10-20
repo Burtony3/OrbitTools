@@ -1,4 +1,4 @@
-function [rvec, vvec] = coe2rv(coe, mu)
+function varargout = coe2rv(coe, mu)
     a = coe(1);
     e = coe(2);
     i = coe(3)*pi/180;
@@ -19,4 +19,12 @@ function [rvec, vvec] = coe2rv(coe, mu)
         ((rvec(1)*h*e)/(r*p))*sin(TA) - (h/r)*(cos(Omega)*sin(omega+TA) + sin(Omega)*cos(omega+TA)*cos(i));
         ((rvec(2)*h*e)/(r*p))*sin(TA) - (h/r)*(sin(Omega)*sin(omega+TA) - cos(Omega)*cos(omega+TA)*cos(i));
         ((rvec(3)*h*e)/(r*p))*sin(TA) + (h/r)*(sin(i)*cos(omega+TA))];
+
+    if nargout == 1
+        varargout{1} = [rvec; vvec];
+    else
+        varargout{1} = rvec;
+        varargout{2} = vvec;
+    end
+
 end
